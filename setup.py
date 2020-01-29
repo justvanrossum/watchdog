@@ -17,6 +17,7 @@
 # limitations under the License.
 
 import sys
+import os
 import os.path
 from codecs import open
 from setuptools import setup, find_packages
@@ -83,7 +84,11 @@ extras_require = {
 with open('README.rst', encoding='utf-8') as f:
     readme = f.read()
 
-with open('changelog.rst', encoding='utf-8') as f:
+enc = 'utf-8'
+if os.getenv("LC_ALL") == "C":
+    enc = None
+    print("Set ENCODING to UTF-8")
+with open('changelog.rst', encoding=enc) as f:
     changelog = f.read()
 
 setup(name="watchdog",
